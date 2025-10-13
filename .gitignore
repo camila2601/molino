@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencias de empaquetadores
+dist/
+build/
+
+# Entorno local
+.env
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
