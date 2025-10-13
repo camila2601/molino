@@ -45,39 +45,47 @@ export default function Search(){
     exportContractsXlsx(selectedEmployee, contracts);
   }
 
-  return (<div>
+  return (<div className="page-content">
     <h2>Búsqueda de Empleados y Contratos</h2>
-    <input placeholder='Buscar por nombre o NRO_DOCUMENTO' value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} />
-    <button onClick={searchEmployees}>Buscar</button>
+    <div className="form-group">
+      <input placeholder='Buscar por nombre o NRO_DOCUMENTO' value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} />
+    </div>
+    <div className="button-group">
+      <button onClick={searchEmployees}>Buscar</button>
+    </div>
     <hr/>
     {employees.map(e => (
-      <div key={e.id} onClick={() => selectEmployee(e)} style={{cursor: 'pointer', padding: '10px', border: '1px solid #ccc', margin: '5px'}}>
+      <div key={e.id} onClick={() => selectEmployee(e)} style={{cursor: 'pointer', padding: '10px', border: '1px solid #ccc', margin: '5px', borderRadius: '8px'}}>
         {e.NOMBRE} {e.APELLIDO} - {e.NRO_DOCUMENTO}
       </div>
     ))}
     {selectedEmployee && (
       <div>
         <h3>Contratos de {selectedEmployee.NOMBRE} {selectedEmployee.APELLIDO}</h3>
-        <button onClick={exportToPdf}>Exportar a PDF</button>
-        <button onClick={exportToXlsx}>Exportar a XLSX</button>
-        <table border="1" style={{width: '100%'}}>
-          <thead>
-            <tr>
-              <th>Fecha Inicio</th>
-              <th>Fecha Fin</th>
-              <th>Valor Contrato</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contracts.map(c => (
-              <tr key={c.id}>
-                <td>{c.FECHA_INICIO}</td>
-                <td>{c.FECHA_FIN}</td>
-                <td>{c.VALOR_CONTRATO}</td>
+        <div className="button-group">
+          <button onClick={exportToPdf}>Exportar a PDF</button>
+          <button onClick={exportToXlsx}>Exportar a XLSX</button>
+        </div>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Valor Contrato</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {contracts.map(c => (
+                <tr key={c.id}>
+                  <td>{c.FECHA_INICIO}</td>
+                  <td>{c.FECHA_FIN}</td>
+                  <td>{c.VALOR_CONTRATO}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     )}
   </div>)

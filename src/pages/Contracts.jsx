@@ -67,10 +67,10 @@ export default function Contracts(){
     }
   }
 
-  return (<div>
+  return (<div className="page-content">
     <h2>Contratos</h2>
     {message && <p style={{color: 'green'}}>{message}</p>}
-    <div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+    <div style={{display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center'}}>
       <select value={form.EMPLOYEE_ID} onChange={e=>setForm({...form,EMPLOYEE_ID:e.target.value})}>
         <option value=''>--Seleccionar empleado--</option>
         {emps.map(x=> <option key={x.id} value={x.id}>{x.NOMBRE} {x.APELLIDO}</option>)}

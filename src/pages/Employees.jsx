@@ -83,7 +83,7 @@ export default function Employees(){
     }
   }
 
-  return (<div>
+  return (<div className="page-content">
     <h2>Empleados</h2>
     {message && <p style={{color: 'green'}}>{message}</p>}
     <div style={{display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center'}}>
