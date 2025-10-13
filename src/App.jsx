@@ -40,7 +40,7 @@ export default function App(){
         <button onClick={() => setPage('employees')}>Empleados</button>
         <button onClick={() => setPage('contracts')}>Contratos</button>
         <button onClick={() => setPage('search')}>Buscar</button>
-        <button onClick={() => setPage('login')}>Logout</button>
+        <button onClick={() => setPage('login')}>Login</button>
       </nav>
     )}
     {renderPage()}

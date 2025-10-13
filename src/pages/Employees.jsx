@@ -86,82 +86,110 @@ export default function Employees(){
   return (<div>
     <h2>Empleados</h2>
     {message && <p style={{color: 'green'}}>{message}</p>}
-    <div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
-      <input placeholder='NRO_DOCUMENTO' value={form.NRO_DOCUMENTO} onChange={e=>setForm({...form,NRO_DOCUMENTO:e.target.value})} />
-      <input placeholder='NOMBRE' value={form.NOMBRE} onChange={e=>setForm({...form,NOMBRE:e.target.value})} />
-      <input placeholder='APELLIDO' value={form.APELLIDO} onChange={e=>setForm({...form,APELLIDO:e.target.value})} />
-      <input placeholder='EDAD' type='number' value={form.EDAD} onChange={e=>setForm({...form,EDAD:e.target.value})} />
-      <select value={form.GENERO} onChange={e=>setForm({...form,GENERO:e.target.value})}>
-        <option value=''>GÉNERO</option>
-        <option value='Masculino'>Masculino</option>
-        <option value='Femenino'>Femenino</option>
-        <option value='Otro'>Otro</option>
-      </select>
-      <select value={form.CARGO} onChange={e=>setForm({...form,CARGO:e.target.value})}>
-        <option value=''>Selecciona CARGO</option>
-        <option value='Gerente General'>Gerente General</option>
-        <option value='Gerente de Producción'>Gerente de Producción</option>
-        <option value='Gerente Comercial / Ventas'>Gerente Comercial / Ventas</option>
-        <option value='Jefe de Planta'>Jefe de Planta</option>
-        <option value='Supervisor de Producción'>Supervisor de Producción</option>
-        <option value='Operario de Molino / Máquina'>Operario de Molino / Máquina</option>
-        <option value='Auxiliar de Producción'>Auxiliar de Producción</option>
-        <option value='Técnico de Mantenimiento'>Técnico de Mantenimiento</option>
-        <option value='Jefe de Almacén / Inventarios'>Jefe de Almacén / Inventarios</option>
-        <option value='Operario de Almacén'>Operario de Almacén</option>
-        <option value='Conductor / Transporte'>Conductor / Transporte</option>
-        <option value='Contador / Administrador'>Contador / Administrador</option>
-        <option value='Auxiliar Administrativo'>Auxiliar Administrativo</option>
-        <option value='Recursos Humanos'>Recursos Humanos</option>
-      </select>
-      <p>Salario estimado: {getSalaryEstimate(form.CARGO)} COP</p>
-      <input placeholder='CORREO' type='email' value={form.CORREO} onChange={e=>setForm({...form,CORREO:e.target.value})} />
-      <input placeholder='NRO_CONTACTO' value={form.NRO_CONTACTO} onChange={e=>setForm({...form,NRO_CONTACTO:e.target.value})} />
-      <select value={form.ESTADO} onChange={e=>setForm({...form,ESTADO:e.target.value})}>
-        <option value='activo'>Activo</option>
-        <option value='retirado'>Retirado</option>
-      </select>
-      <textarea placeholder='OBSERVACIONES' value={form.OBSERVACIONES} onChange={e=>setForm({...form,OBSERVACIONES:e.target.value})} />
-      <button onClick={save}>{editingId ? 'Actualizar' : 'Guardar'}</button>
-      {editingId && <button onClick={() => {setForm({NRO_DOCUMENTO:'',NOMBRE:'',APELLIDO:'',EDAD:'',GENERO:'',CARGO:'',CORREO:'',NRO_CONTACTO:'',ESTADO:'activo',OBSERVACIONES:''}); setEditingId(null);}}>Cancelar</button>}
+    <div style={{display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center'}}>
+      <div className="form-group">
+        <input placeholder='NRO_DOCUMENTO' value={form.NRO_DOCUMENTO} onChange={e=>setForm({...form,NRO_DOCUMENTO:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <input placeholder='NOMBRE' value={form.NOMBRE} onChange={e=>setForm({...form,NOMBRE:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <input placeholder='APELLIDO' value={form.APELLIDO} onChange={e=>setForm({...form,APELLIDO:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <input placeholder='EDAD' type='number' value={form.EDAD} onChange={e=>setForm({...form,EDAD:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <select value={form.GENERO} onChange={e=>setForm({...form,GENERO:e.target.value})}>
+          <option value=''>GÉNERO</option>
+          <option value='Masculino'>Masculino</option>
+          <option value='Femenino'>Femenino</option>
+          <option value='Otro'>Otro</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <select value={form.CARGO} onChange={e=>setForm({...form,CARGO:e.target.value})}>
+          <option value=''>Selecciona CARGO</option>
+          <option value='Gerente General'>Gerente General</option>
+          <option value='Gerente de Producción'>Gerente de Producción</option>
+          <option value='Gerente Comercial / Ventas'>Gerente Comercial / Ventas</option>
+          <option value='Jefe de Planta'>Jefe de Planta</option>
+          <option value='Supervisor de Producción'>Supervisor de Producción</option>
+          <option value='Operario de Molino / Máquina'>Operario de Molino / Máquina</option>
+          <option value='Auxiliar de Producción'>Auxiliar de Producción</option>
+          <option value='Técnico de Mantenimiento'>Técnico de Mantenimiento</option>
+          <option value='Jefe de Almacén / Inventarios'>Jefe de Almacén / Inventarios</option>
+          <option value='Operario de Almacén'>Operario de Almacén</option>
+          <option value='Conductor / Transporte'>Conductor / Transporte</option>
+          <option value='Contador / Administrador'>Contador / Administrador</option>
+          <option value='Auxiliar Administrativo'>Auxiliar Administrativo</option>
+          <option value='Recursos Humanos'>Recursos Humanos</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <p style={{margin: '5px 0', fontWeight: 'bold'}}>Salario estimado: {getSalaryEstimate(form.CARGO)} COP</p>
+      </div>
+      <div className="form-group">
+        <input placeholder='CORREO' type='email' value={form.CORREO} onChange={e=>setForm({...form,CORREO:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <input placeholder='NRO_CONTACTO' value={form.NRO_CONTACTO} onChange={e=>setForm({...form,NRO_CONTACTO:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <select value={form.ESTADO} onChange={e=>setForm({...form,ESTADO:e.target.value})}>
+          <option value='activo'>Activo</option>
+          <option value='retirado'>Retirado</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <textarea placeholder='OBSERVACIONES' value={form.OBSERVACIONES} onChange={e=>setForm({...form,OBSERVACIONES:e.target.value})} />
+      </div>
+      <div className="button-group">
+        <button onClick={save}>{editingId ? 'Actualizar' : 'Guardar'}</button>
+        {editingId && <button onClick={() => {setForm({NRO_DOCUMENTO:'',NOMBRE:'',APELLIDO:'',EDAD:'',GENERO:'',CARGO:'',CORREO:'',NRO_CONTACTO:'',ESTADO:'activo',OBSERVACIONES:''}); setEditingId(null);}}>Cancelar</button>}
+      </div>
     </div>
     <hr/>
-    <table border="1" style={{width: '100%'}}>
-      <thead>
-        <tr>
-          <th>NRO_DOCUMENTO</th>
-          <th>NOMBRE</th>
-          <th>APELLIDO</th>
-          <th>EDAD</th>
-          <th>GÉNERO</th>
-          <th>CARGO</th>
-          <th>CORREO</th>
-          <th>NRO_CONTACTO</th>
-          <th>ESTADO</th>
-          <th>OBSERVACIONES</th>
-          <th>ACCIONES</th>
-        </tr>
-      </thead>
-      <tbody>
-        {emps.map(e=> (
-          <tr key={e.id}>
-            <td>{e.NRO_DOCUMENTO}</td>
-            <td>{e.NOMBRE}</td>
-            <td>{e.APELLIDO}</td>
-            <td>{e.EDAD}</td>
-            <td>{e.GENERO}</td>
-            <td>{e.CARGO}</td>
-            <td>{e.CORREO}</td>
-            <td>{e.NRO_CONTACTO}</td>
-            <td>{e.ESTADO}</td>
-            <td>{e.OBSERVACIONES}</td>
-            <td>
-              <button onClick={() => editEmp(e)}>Editar</button>
-              <button onClick={() => deleteEmp(e.id)}>Eliminar</button>
-            </td>
+    <div className="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>NRO_DOCUMENTO</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>EDAD</th>
+            <th>GÉNERO</th>
+            <th>CARGO</th>
+            <th>CORREO</th>
+            <th>NRO_CONTACTO</th>
+            <th>ESTADO</th>
+            <th>OBSERVACIONES</th>
+            <th>ACCIONES</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {emps.map(e=> (
+            <tr key={e.id}>
+              <td>{e.NRO_DOCUMENTO}</td>
+              <td>{e.NOMBRE}</td>
+              <td>{e.APELLIDO}</td>
+              <td>{e.EDAD}</td>
+              <td>{e.GENERO}</td>
+              <td>{e.CARGO}</td>
+              <td>{e.CORREO}</td>
+              <td>{e.NRO_CONTACTO}</td>
+              <td>{e.ESTADO}</td>
+              <td>{e.OBSERVACIONES}</td>
+              <td>
+                <div className="table-actions">
+                  <button onClick={() => editEmp(e)}>Editar</button>
+                  <button onClick={() => deleteEmp(e.id)}>Eliminar</button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>)
 }
