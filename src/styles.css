@@ -1,0 +1,12 @@
+body { font-family: Arial, sans-serif; background:#f4f1e8; color:#333; } /* Beige background like rice husk */
+.container{ max-width:900px; margin:30px auto; background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+h1 { color: #8b4513; } /* Saddle brown for rice theme */
+nav { margin-bottom: 20px; }
+nav button { margin-right: 10px; padding: 8px 16px; background: #daa520; color: white; border: none; border-radius: 4px; cursor: pointer; } /* Goldenrod for rice grain */
+nav button:hover { background: #b8860b; }
+input, select, textarea { margin: 5px 0; padding: 8px; width: 100%; max-width: 300px; border: 1px solid #ccc; border-radius: 4px; }
+button { margin: 5px 0; padding: 8px 16px; background: #228b22; color: white; border: none; border-radius: 4px; cursor: pointer; } /* Forest green for nature */
+button:hover { background: #006400; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
