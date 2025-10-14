@@ -78,10 +78,12 @@ export default function Contracts(){
         </select>
       </div>
       <div className="form-group">
-        <input placeholder='Fecha inicio YYYY-MM-DD' type='date' value={form.FECHA_INICIO} onChange={e=>setForm({...form,FECHA_INICIO:e.target.value})} />
+        <label>Fecha Inicio</label>
+        <input type='date' value={form.FECHA_INICIO} onChange={e=>setForm({...form,FECHA_INICIO:e.target.value})} />
       </div>
       <div className="form-group">
-        <input placeholder='Fecha fin YYYY-MM-DD' type='date' value={form.FECHA_FIN} onChange={e=>setForm({...form,FECHA_FIN:e.target.value})} />
+        <label>Fecha Fin</label>
+        <input type='date' value={form.FECHA_FIN} onChange={e=>setForm({...form,FECHA_FIN:e.target.value})} />
       </div>
       <div className="form-group">
         <input placeholder='Valor contrato' type='number' value={form.VALOR_CONTRATO} onChange={e=>setForm({...form,VALOR_CONTRATO:e.target.value})} />
