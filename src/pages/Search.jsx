@@ -15,11 +15,11 @@ export default function Search(){
     const q = query(collection(db, 'employees'), where('NOMBRE', '>=', searchTerm), where('NOMBRE', '<=', searchTerm + '\uf8ff'));
     const snap = await getDocs(q);
     let results = snap.docs.map(d => ({id: d.id, ...d.data()}));
-    // Also search by NRO_DOCUMENTO
+
     const q2 = query(collection(db, 'employees'), where('NRO_DOCUMENTO', '==', searchTerm));
     const snap2 = await getDocs(q2);
     results = [...results, ...snap2.docs.map(d => ({id: d.id, ...d.data()}))];
-    // Remove duplicates
+   
     const unique = results.filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
     setEmployees(unique);
   }

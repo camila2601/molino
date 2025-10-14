@@ -70,42 +70,56 @@ export default function Contracts(){
   return (<div className="page-content">
     <h2>Contratos</h2>
     {message && <p style={{color: 'green'}}>{message}</p>}
-    <div style={{display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center'}}>
-      <select value={form.EMPLOYEE_ID} onChange={e=>setForm({...form,EMPLOYEE_ID:e.target.value})}>
-        <option value=''>--Seleccionar empleado--</option>
-        {emps.map(x=> <option key={x.id} value={x.id}>{x.NOMBRE} {x.APELLIDO}</option>)}
-      </select>
-      <input placeholder='Fecha inicio YYYY-MM-DD' type='date' value={form.FECHA_INICIO} onChange={e=>setForm({...form,FECHA_INICIO:e.target.value})} />
-      <input placeholder='Fecha fin YYYY-MM-DD' type='date' value={form.FECHA_FIN} onChange={e=>setForm({...form,FECHA_FIN:e.target.value})} />
-      <input placeholder='Valor contrato' type='number' value={form.VALOR_CONTRATO} onChange={e=>setForm({...form,VALOR_CONTRATO:e.target.value})} />
-      <button onClick={save}>{editingId ? 'Actualizar' : 'Guardar'}</button>
-      {editingId && <button onClick={() => {setForm({FECHA_INICIO:'',FECHA_FIN:'',VALOR_CONTRATO:'',EMPLOYEE_ID:''}); setEditingId(null);}}>Cancelar</button>}
+    <div>
+      <div className="form-group">
+        <select value={form.EMPLOYEE_ID} onChange={e=>setForm({...form,EMPLOYEE_ID:e.target.value})}>
+          <option value=''>--Seleccionar empleado--</option>
+          {emps.map(x=> <option key={x.id} value={x.id}>{x.NOMBRE} {x.APELLIDO}</option>)}
+        </select>
+      </div>
+      <div className="form-group">
+        <input placeholder='Fecha inicio YYYY-MM-DD' type='date' value={form.FECHA_INICIO} onChange={e=>setForm({...form,FECHA_INICIO:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <input placeholder='Fecha fin YYYY-MM-DD' type='date' value={form.FECHA_FIN} onChange={e=>setForm({...form,FECHA_FIN:e.target.value})} />
+      </div>
+      <div className="form-group">
+        <input placeholder='Valor contrato' type='number' value={form.VALOR_CONTRATO} onChange={e=>setForm({...form,VALOR_CONTRATO:e.target.value})} />
+      </div>
+      <div className="button-group">
+        <button onClick={save}>{editingId ? 'Actualizar' : 'Guardar'}</button>
+        {editingId && <button onClick={() => {setForm({FECHA_INICIO:'',FECHA_FIN:'',VALOR_CONTRATO:'',EMPLOYEE_ID:''}); setEditingId(null);}}>Cancelar</button>}
+      </div>
     </div>
     <hr/>
-    <table border="1" style={{width: '100%'}}>
-      <thead>
-        <tr>
-          <th>Empleado</th>
-          <th>Fecha Inicio</th>
-          <th>Fecha Fin</th>
-          <th>Valor Contrato</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {contracts.map(c=> (
-          <tr key={c.id}>
-            <td>{c.EMPLOYEE_SNAPSHOT?.NOMBRE} {c.EMPLOYEE_SNAPSHOT?.APELLIDO} ({c.EMPLOYEE_SNAPSHOT?.NRO_DOCUMENTO})</td>
-            <td>{c.FECHA_INICIO}</td>
-            <td>{c.FECHA_FIN}</td>
-            <td>{c.VALOR_CONTRATO}</td>
-            <td>
-              <button onClick={() => editContract(c)}>Editar</button>
-              <button onClick={() => deleteContract(c.id)}>Eliminar</button>
-            </td>
+    <div className="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Empleado</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Valor Contrato</th>
+            <th>Acciones</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {contracts.map(c=> (
+            <tr key={c.id}>
+              <td>{c.EMPLOYEE_SNAPSHOT?.NOMBRE} {c.EMPLOYEE_SNAPSHOT?.APELLIDO} ({c.EMPLOYEE_SNAPSHOT?.NRO_DOCUMENTO})</td>
+              <td>{c.FECHA_INICIO}</td>
+              <td>{c.FECHA_FIN}</td>
+              <td>{c.VALOR_CONTRATO}</td>
+              <td>
+                <div className="table-actions">
+                  <button onClick={() => editContract(c)}>Editar</button>
+                  <button onClick={() => deleteContract(c.id)}>Eliminar</button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>)
 }

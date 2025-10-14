@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Login from './pages/Login';
 import Employees from './pages/Employees';
 import Contracts from './pages/Contracts';
@@ -10,28 +10,33 @@ export default function App() {
   const [page, setPage] = useState('login');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const tableRef = useRef(null);
 
   // Verificar autenticación al iniciar la app
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        setPage('employees'); // Si hay usuario, va a employees
+        setPage('employees'); // Va a employees si hay usuario
       } else {
         setUser(null);
-        setPage('login'); // Si no hay usuario, va a login
+        setPage('login');
       }
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
-  // Renderizado condicional basado en la página
+  // 👇 Siempre colocar scroll de tabla al inicio (izquierda)
+  useEffect(() => {
+    if (tableRef.current) tableRef.current.scrollLeft = 0;
+  }, [page]);
+
+  // Renderizado condicional
   const renderPage = () => {
     switch (page) {
       case 'employees':
-        return <Employees />;
+        return <Employees tableRef={tableRef} />;
       case 'contracts':
         return <Contracts />;
       case 'search':
@@ -54,7 +59,6 @@ export default function App() {
     <div className="container">
       <h1>SIRH - Molino de Arroz</h1>
 
-      {/* Mostrar navbar solo si el usuario está autenticado */}
       {user && page !== 'login' && (
         <nav>
           <button onClick={() => setPage('employees')}>Empleados</button>
@@ -62,14 +66,14 @@ export default function App() {
           <button onClick={() => setPage('search')}>Buscar</button>
           <button
             onClick={() => {
-              if (window.confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-                auth.signOut(); // Cierra sesión
+              if (window.confirm('¿Estás seguro de cerrar sesión?')) {
+                auth.signOut();
                 setUser(null);
-                setPage('login'); // Redirige a login
+                setPage('login');
               }
             }}
           >
-            Logout
+            Salir
           </button>
         </nav>
       )}
